@@ -87,6 +87,16 @@ body {
   }
 }
 .tiptap{
+    img {
+    display: block;
+    height: auto;
+    margin: 1.5rem 0;
+    max-width: 100%;
+
+    &.ProseMirror-selectednode {
+      outline: 3px solid var(--primary);
+    }
+  }
     table {
     border-collapse: collapse;
     margin: 0;
@@ -115,7 +125,7 @@ body {
     }
 
     .selectedCell:after {
-      background: #c7c7c8;
+      background: #959596;
       content: '';
       left: 0;
       right: 0;
