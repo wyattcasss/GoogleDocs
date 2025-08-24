@@ -16,6 +16,7 @@ import FontFamily from '@tiptap/extension-font-family'
 import { useEditorStore } from '@/store/use-editor-store';
 import TextStyle from '@tiptap/extension-text-style';
 import Link from '@tiptap/extension-link'
+import TextAlign from "@tiptap/extension-text-align"
 
 export const Editor = () => {
     const { setEditor } = useEditorStore();
@@ -66,6 +67,10 @@ export const Editor = () => {
             TableHeader,
             Image,
             ImageResize,
+            TextAlign.configure({
+                types: ["heading", "paragraph"]
+
+            }),
             Link.configure({
                 openOnClick: false,
                 autolink: true,
