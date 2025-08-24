@@ -2,8 +2,9 @@
 import { cn } from '@/lib/utils';
 import { useEditorStore } from '@/store/use-editor-store';
 import { useEditor } from '@tiptap/react';
-import { BoldIcon, ChevronDown, ChevronDownIcon, Highlighter, ItalicIcon, ListTodoIcon, LucideIcon, MessageSquare, MessageSquarePlusIcon, PrinterIcon, Redo2Icon, RemoveFormatting, RemoveFormattingIcon, SpellCheckIcon, UnderlineIcon, Undo2Icon } from 'lucide-react';
+import { BoldIcon, ChevronDown, ChevronDownIcon, Highlighter, ItalicIcon, Link2Icon, ListTodoIcon, LucideIcon, MessageSquare, MessageSquarePlusIcon, PrinterIcon, Redo2Icon, RemoveFormatting, RemoveFormattingIcon, SpellCheckIcon, UnderlineIcon, Undo2Icon } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import { useState} from "react";
 import { 
     DropdownMenu,
     DropdownMenuContent,
@@ -12,8 +13,41 @@ import {
  } from '@/components/ui/dropdown-menu';
 import {type Level} from "@tiptap/extension-heading";
 import {type ColorResult, CirclePicker, SketchPicker} from "react-color";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
 
-const LinkButton = ()
+const LinkButton = () =>{
+    const { editor } = useEditorStore();
+    const [value, setValue] = useState(editor?.getAttributes("link").href || "");
+    const onChange = (href: string) =>{
+        editor?.chain().focus().extendMarkRange("link").setLink({ href }).run();
+        setValue("")
+    };
+    return(
+        <DropdownMenu onOpenChange={(open) => setValue(editor?.getAttributes("link").href || "")}>
+            <DropdownMenuTrigger asChild>
+                <button 
+                    
+                    className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+                >  
+                    <Link2Icon className="size-4" />
+                </button>   
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className='p-2.5 flex item-cent gap-x-2'>
+                <Input 
+                    placeholder='https://Example.com'
+                    value={value}
+                    onChange={(e)=> setValue(e.target.value)}
+                />
+                <Button onClick={() => onChange(value)}>
+                    Apply
+                </Button>
+                
+            </DropdownMenuContent>
+        </DropdownMenu>
+    )    
+
+};
 
 const HighlightColorButton = () => {
     const { editor } = useEditorStore();
@@ -268,7 +302,7 @@ export const Toolbar = () =>{
             <TextColorButton/>
             <HighlightColorButton/>
             <Separator orientation="vertical" className="h-6 bg-neutral-300"/>
-            {}
+            <LinkButton/>
             {}
             {}
             {}
