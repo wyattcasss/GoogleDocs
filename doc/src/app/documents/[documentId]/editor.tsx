@@ -17,6 +17,7 @@ import { useEditorStore } from '@/store/use-editor-store';
 import TextStyle from '@tiptap/extension-text-style';
 import Link from '@tiptap/extension-link'
 import TextAlign from "@tiptap/extension-text-align"
+import { FontSizeExtension } from '@/extensions/font-size';
 
 export const Editor = () => {
     const { setEditor } = useEditorStore();
@@ -63,6 +64,7 @@ export const Editor = () => {
             Table,
             Underline,
             TableCell,
+            FontSizeExtension,
             TableRow,
             TableHeader,
             Image,
