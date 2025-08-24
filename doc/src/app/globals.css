@@ -87,7 +87,14 @@ body {
   }
 }
 .tiptap{
-    img {
+  a {
+    @apply text-blue-600;
+    cursor: pointer;
+    &:hover{
+      @apply underline;
+    }
+  }
+  img {
     display: block;
     height: auto;
     margin: 1.5rem 0;
