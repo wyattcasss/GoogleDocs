@@ -1,0 +1,20 @@
+<svg id='Google_Docs_48' width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='48' height='48' stroke='none' fill='#000000' opacity='0'/>
+
+
+<g transform="matrix(0.92 0 0 0.92 24 24)" >
+<g style="" >
+<g transform="matrix(1 0 0 1 0 0)" >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(33,150,243); fill-rule: nonzero; opacity: 1;" transform=" translate(-24, -24)" d="M 37 45 L 11 45 C 9.343 45 8 43.657 8 42 L 8 6 C 8 4.343 9.343 3 11 3 L 30 3 L 40 13 L 40 42 C 40 43.657 38.657 45 37 45 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(1 0 0 1 11 -16)" >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(187,222,251); fill-rule: nonzero; opacity: 1;" transform=" translate(-35, -8)" d="M 40 13 L 30 13 L 30 3 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(1 0 0 1 11 -6)" >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(21,101,192); fill-rule: nonzero; opacity: 1;" transform=" translate(-35, -18)" d="M 30 13 L 40 23 L 40 13 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(1 0 0 1 0 6)" >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(227,242,253); fill-rule: nonzero; opacity: 1;" transform=" translate(-24, -30)" d="M 15 23 L 33 23 L 33 25 L 15 25 z M 15 27 L 33 27 L 33 29 L 15 29 z M 15 31 L 33 31 L 33 33 L 15 33 z M 15 35 L 25 35 L 25 37 L 15 37 z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg>
