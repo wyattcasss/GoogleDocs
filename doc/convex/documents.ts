@@ -1,4 +1,5 @@
 import { mutation, query } from "./_generated/server";
+import { paginationOptsValidator } from "convex/server";
 import { v } from "convex/values"
 export const create = mutation({
     args: { title: v.optional(v.string()), initialContent: v.optional(v.string())},
@@ -17,7 +18,8 @@ export const create = mutation({
 })
 
 export const get = query({
-  handler: async (ctx) => {
-    return await ctx.db.query("documents").collect();
+    args: { paginationOpts: paginationOptsValidator},
+  handler: async (ctx, args) => {
+    return await ctx.db.query("documents").paginate(args.paginationOpts);
   },
 });
