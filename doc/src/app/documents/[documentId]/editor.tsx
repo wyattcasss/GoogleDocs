@@ -1,4 +1,5 @@
 "use client";
+import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
 import { useEditor, EditorContent} from '@tiptap/react';
 import { Color } from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
@@ -22,6 +23,7 @@ import { LineHeightExtension } from '@/extensions/line-height';
 import { Ruler } from './ruler';
 
 export const Editor = () => {
+    const liveblocks = useLiveblocksExtension();
     const { setEditor } = useEditorStore();
     const editor = useEditor({
         immediatelyRender: false,
@@ -56,6 +58,7 @@ export const Editor = () => {
             },
         },
         extensions: [
+            liveblocks,
             StarterKit,
             FontFamily,
             Highlight.configure({
