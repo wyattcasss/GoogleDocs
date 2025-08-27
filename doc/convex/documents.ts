@@ -80,7 +80,7 @@ export const updateById = mutation({
             throw new Error("Document not found")
         }
         const isOwner = document.ownerId === user.subject;
-        const isOrganizationMember = document.organizationId === organizationId;
+        const isOrganizationMember = !!(document.organizationId && document.organizationId === organizationId);
 
         if(!isOwner && isOrganizationMember){
             throw new Error("Unauthorized")
@@ -103,10 +103,22 @@ export const removeById = mutation({
             throw new Error("Document not found")
         }
         const isOwner = document.ownerId === user.subject;
-        const isOrganizationMember = document.organizationId === organizationId;
+        const isOrganizationMember = !!(document.organizationId && document.organizationId === organizationId);
         if(!isOwner && !isOrganizationMember){
             throw new Error("Unauthorized")
         }
         return await ctx.db.delete(args.id);
     },
 })
+export const getById = query({
+    args: { id: v.id("documents")},
+    handler: async (ctx, { id }) =>{
+        const document = await ctx.db.get(id);
+        if(!document){
+            throw new Error("Document not found")
+        }
+
+        return document;
+    },
+    
+});
