@@ -14,6 +14,7 @@ import { Id } from "../../../convex/_generated/dataModel";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface RemoveDialogProps{
     documentId: Id<"documents">;
@@ -24,6 +25,7 @@ export const RemoveDialog = ({
     documentId,
     children,
 }: RemoveDialogProps) => {
+    const router = useRouter();
     const remove= useMutation(api.documents.removeById);
     const [isRemoving, setIsRemoving] = useState(false);
 
@@ -50,6 +52,9 @@ export const RemoveDialog = ({
                         e.stopPropagation();
                         setIsRemoving(true);
                         remove({ id: documentId})
+                            .then(()=>{
+                                router.push("/")
+                            })
                             .finally(()=> setIsRemoving(false));
 
                     }}
