@@ -9,14 +9,15 @@ const liveblocks = new Liveblocks ({
 });
 
 export async function POST(req: Request){
-    const { sessionClaims } = await auth();
+    const { userId, orgId } = await auth();
     
     // Add debugging
     console.log("=== DEBUG AUTH ===");
-    console.log("sessionClaims:", sessionClaims);
+    console.log("userId:", userId);
+    console.log("orgId:", orgId);
     
-    if(!sessionClaims){
-        console.log("No sessionClaims - returning 401");
+    if(!userId){
+        console.log("No userId - returning 401");
         return new Response("Unauthorized", {status: 401});
     }
     
@@ -38,15 +39,13 @@ export async function POST(req: Request){
     }
 
     const isOwner = document.ownerId === user.id;
-    // Get orgId from sessionClaims.o.id with proper type checking
-    const orgId = (sessionClaims as any)?.o?.id;
     const isOrganizationMember = !!(document.organizationId && document.organizationId === orgId);
     
     console.log("document.ownerId:", document.ownerId);
     console.log("user.id:", user.id);
     console.log("isOwner:", isOwner);
     console.log("document.organizationId:", document.organizationId);
-    console.log("orgId from sessionClaims:", orgId);
+    console.log("orgId:", orgId);
     console.log("isOrganizationMember:", isOrganizationMember);
 
     if(!isOwner && !isOrganizationMember){
