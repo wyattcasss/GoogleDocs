@@ -9,15 +9,14 @@ const liveblocks = new Liveblocks ({
 });
 
 export async function POST(req: Request){
-    const { userId, orgId } = await auth();
+    const { sessionClaims } = await auth();
     
     // Add debugging
     console.log("=== DEBUG AUTH ===");
-    console.log("userId:", userId);
-    console.log("orgId:", orgId);
+    console.log("sessionClaims:", sessionClaims);
     
-    if(!userId){
-        console.log("No userId - returning 401");
+    if(!sessionClaims){
+        console.log("No sessionClaims - returning 401");
         return new Response("Unauthorized", {status: 401});
     }
     
@@ -39,22 +38,28 @@ export async function POST(req: Request){
     }
 
     const isOwner = document.ownerId === user.id;
+    // Get orgId from sessionClaims.o.id with proper type checking
+    const orgId = (sessionClaims as any)?.o?.id;
     const isOrganizationMember = !!(document.organizationId && document.organizationId === orgId);
     
+    console.log("document.ownerId:", document.ownerId);
+    console.log("user.id:", user.id);
+    console.log("isOwner:", isOwner);
+    console.log("document.organizationId:", document.organizationId);
+    console.log("orgId from sessionClaims:", orgId);
+    console.log("isOrganizationMember:", isOrganizationMember);
 
     if(!isOwner && !isOrganizationMember){
         console.log("Not owner and not org member - returning 401");
         return new Response("Unauthorized", {status: 401});
     }
     
-    const name  = user.fullName ?? user.primaryEmailAddress?.emailAddress ?? "Anonymous"
- 
-
+    console.log("Authorization successful!");
+    
     const session = liveblocks.prepareSession(user.id, {
         userInfo: {
-            name,
+            name: user.fullName ?? user.primaryEmailAddress?.emailAddress ?? "Anonymous",
             avatar: user.imageUrl,
-            
         },
     })
     session.allow(room, session.FULL_ACCESS);
