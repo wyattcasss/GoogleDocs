@@ -41,12 +41,6 @@ export async function POST(req: Request){
     const isOwner = document.ownerId === user.id;
     const isOrganizationMember = !!(document.organizationId && document.organizationId === orgId);
     
-    console.log("document.ownerId:", document.ownerId);
-    console.log("user.id:", user.id);
-    console.log("isOwner:", isOwner);
-    console.log("document.organizationId:", document.organizationId);
-    console.log("orgId:", orgId);
-    console.log("isOrganizationMember:", isOrganizationMember);
 
     if(!isOwner && !isOrganizationMember){
         console.log("Not owner and not org member - returning 401");
@@ -54,15 +48,13 @@ export async function POST(req: Request){
     }
     
     const name  = user.fullName ?? user.primaryEmailAddress?.emailAddress ?? "Anonymous"
-    const nameToNumber = name.split("").reduce((acc,char)=> acc+ char.charCodeAt(0),0)
-    const hue = Math.abs(nameToNumber) % 360;
-    const color = `hsl(${hue}, 80%, 60%)`;
+ 
 
     const session = liveblocks.prepareSession(user.id, {
         userInfo: {
             name,
             avatar: user.imageUrl,
-            color,
+            
         },
     })
     session.allow(room, session.FULL_ACCESS);
